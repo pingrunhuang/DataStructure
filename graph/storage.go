@@ -30,11 +30,11 @@ type ALGraph struct {
 // conversion
 func (g *ALGraph) ALGraph2MGraph() MGraph {
 	// init
-	edges := make([][]float32, len(g.adjlist))
+	edges := make([][]float32, g.nodes)
 	for i := range edges {
-		edges[i] = make([]float32, len(g.adjlist))
+		edges[i] = make([]float32, g.nodes)
 	}
-	vertices := make([]MVertex, len(g.adjlist))
+	vertices := make([]MVertex, g.nodes)
 	edgesNo := 0
 
 	for index := range g.adjlist {
@@ -50,7 +50,7 @@ func (g *ALGraph) ALGraph2MGraph() MGraph {
 		}
 		vertices[index] = MVertex{index, g.adjlist[index].data}
 	}
-	return MGraph{edges, len(g.adjlist), edgesNo, vertices}
+	return MGraph{edges, g.nodes, edgesNo, vertices}
 }
 
 // func (g *MGraph) MGraph2ALGraph() ALGraph {
